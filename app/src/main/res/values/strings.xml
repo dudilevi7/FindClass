@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">FindClass</string>
+    <string name="Map">FindClass</string>
+    <string name="buildings1">buildings1</string>
+    <string name="buildings2">buildings2</string>
+    <string name="buildings3">buildings3</string>
+    <string name="buildings4">buildings4</string>
+    <string name="buildings5">buildings5</string>
+    <string name="buildings6">buildings6</string>
+    <string name="buildings7">buildings7</string>
+    <string name="buildings8">buildings8</string>
+    <string name="Buildings">Buildings</string>
+    <string name="disconnected">You cant register with this email or password</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Email">Email</string>
+    <string name="Register">Register</string>
+    <string name="CreateNewAccount">Create a new account</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="password_greater_6">Password must be greater then 6 digit</string>
+    <string name="login">Login</string>
+    <string name="Login">Login</string>
+    <string name="Login_Failed">Login Failed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Chats">Chats</string>
+    <string name="Users">Users</string>
+    <string name="profile">profile</string>
+    <string name="type_message">Type a meesage</string>
+    <string name="uploading">Uploading...</string>
+    <string name="seen">seen</string>
+    <string name="Delivered">Delivered</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="reset_explain">By clicking on reset ,You will recive a email with the new password</string>
+    <string name="reset">Reset</string>
+    <string name="New_Message">New Message</string>
+    <string name="eror">Eror</string>
+    <string name="Loging_please_wait...">Loging please wait...</string>
+</resources>

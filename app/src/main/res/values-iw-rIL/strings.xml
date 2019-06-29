@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FindClass</string>
+    <string name="Map">מפה</string>
+    <string name="buildings1">בניין 1</string>
+    <string name="buildings2">בניין 2</string>
+    <string name="buildings3">בניין 3</string>
+    <string name="buildings4">בניין 4</string>
+    <string name="buildings5">בניין 5</string>
+    <string name="buildings6">בניין 6</string>
+    <string name="buildings7">בניין 7</string>
+    <string name="buildings8">בניין 8</string>
+    <string name="Buildings">בניינים</string>
+    <string name="disconnected">"לא ניתן להתחבר עם האימייל או הסיסמא "</string>
+    <string name="Username">שם משתמש</string>
+    <string name="Password">סיסמא</string>
+    <string name="Email">אימייל</string>
+    <string name="Register">הירשם</string>
+    <string name="CreateNewAccount">צור משתמש חדש</string>
+    <string name="enter_name">הכנס שם</string>
+    <string name="enter_email">הכנס אימייל</string>
+    <string name="enter_password">הכנס סיסמא</string>
+    <string name="password_greater_6">סיסמא חייבת להכיל יותר מ 6 תווים</string>
+    <string name="login">היכנס</string>
+    <string name="Login">התחברות</string>
+    <string name="Login_Failed">התחברות נכשלה</string>
+    <string name="Chats">צ\'אטים</string>
+    <string name="Users">משתמשים</string>
+    <string name="profile">פרופיל</string>
+    <string name="type_message">הקלד הודעה</string>
+    <string name="uploading">מעלה תמונה...</string>
+    <string name="seen">נקרא</string>
+    <string name="Delivered">נשלח</string>
+    <string name="forgot_your_password">שכחת את הסיסמא?</string>
+    <string name="reset_explain">"בלחיצה על שחזר אתה תקבל אימייל עם סיסמא חדשה "</string>
+    <string name="reset">שחזר</string>
+    <string name="New_Message">הודעה חדשה</string>
+    <string name="eror">קיימת שגיאה</string>
+    <string name="Loging_please_wait...">מבצע התחברות, אנא המתן...</string>
+</resources>

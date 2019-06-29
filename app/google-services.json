@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "336725556730",
+    "firebase_url": "https://findclass-244518.firebaseio.com",
+    "project_id": "findclass-244518",
+    "storage_bucket": "findclass-244518.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336725556730:android:19f3b5b7869075e5",
+        "android_client_info": {
+          "package_name": "com.findclass.renan.findclass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336725556730-4153m3ltrkaf7gajv2ln6i33a769plrs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.findclass.renan.findclass",
+            "certificate_hash": "ab56ede546dc3b22fafe9985231614f05e6068ef"
+          }
+        },
+        {
+          "client_id": "336725556730-9lvaouia0p9amhi32jratp0cdeeo49qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXQdiMC-CsAuNlsW3gFo57c_o36MDg95U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336725556730-9lvaouia0p9amhi32jratp0cdeeo49qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
