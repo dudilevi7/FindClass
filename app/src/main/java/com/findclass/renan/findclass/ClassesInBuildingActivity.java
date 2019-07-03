@@ -28,7 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -73,7 +76,11 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
                         JSONObject object = rows.getJSONObject(i);
                         String classNumber = object.getString("class");
                         String vacant = object.getString("vacant");
-                        String hours = object.getString("hours");
+                        int fromHour = object.getInt("from");
+                        int toHour = object.getInt("to");
+                        String hours = checkTime(fromHour,toHour);
+                        if (hours.contains("x")) vacant ="yes";
+                        else vacant = "no";
                         classList.add(new Class(classNumber,vacant,building_number,hours));
                     }
                     RecyclerView recyclerView = findViewById(R.id.recycle2);
@@ -92,6 +99,18 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(request);
+    }
+
+    private String checkTime(int fromHour, int toHour) {
+        Date date = Calendar.getInstance().getTime();
+        int currHour ;
+        String correctHour;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH");
+        currHour= Integer.parseInt(dateFormat.format(date));
+        if (fromHour<=currHour && currHour<=toHour){
+            correctHour = fromHour+":00 - "+toHour+":00";
+        }else correctHour = "x";
+        return correctHour;
     }
 
     @Override

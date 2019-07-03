@@ -46,7 +46,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             classViewHolder.vacantColor.setBackgroundColor(classViewHolder.itemView.getResources().getColor(R.color.red));
             classViewHolder.mAvailable.setText(classViewHolder.itemView.getResources().getString(R.string.unavailable));
             classViewHolder.mHours.setText(classTemp.getmHours()+"");
-        }else {
+        }if(classTemp.getmVacant().contains("yes")){
             classViewHolder.vacantColor.setBackgroundColor(classViewHolder.itemView.getResources().getColor(R.color.green));
             classViewHolder.mAvailable.setText(classViewHolder.itemView.getResources().getString(R.string.available));
         }
