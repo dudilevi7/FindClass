@@ -8,25 +8,45 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.findclass.renan.findclass.Adapter.BuildingAdapter;
+import com.findclass.renan.findclass.Adapter.ClassAdapter;
 import com.findclass.renan.findclass.Chat.ChatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ClassesInBuildingActivity extends AppCompatActivity {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.Inflater;
+
+public class ClassesInBuildingActivity extends AppCompatActivity {
     FloatingActionButton floatingButton;
+    private List<Class> classList;
+    private ClassAdapter classAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classes_in_building);
+        String building_number = getIntent().getStringExtra("building_number");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle(getString(R.string.building)+building_number+" - "+getString(R.string.classof));
 
-        String building_number = getIntent().getStringExtra("building_number");
 
         floatingButton = findViewById(R.id.chat_btn);
         floatingButton.setOnClickListener(new View.OnClickListener() {
@@ -36,9 +56,44 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        parseJSONClasses(building_number);
 
     }
+
+    private void parseJSONClasses(final String building_number) {
+        String apiUrl = "http://gsx2json.com/api?id=1UDyRJU39JasISTaA8JfsQmQUT-BWhCMPD3MUWe9Cgs8&sheet="+building_number;
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        classList = new ArrayList<>();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, apiUrl, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray rows = response.getJSONArray("rows");
+                    for (int i = 0; i < rows.length(); i++) {
+                        JSONObject object = rows.getJSONObject(i);
+                        String classNumber = object.getString("class");
+                        String vacant = object.getString("vacant");
+                        String hours = object.getString("hours");
+                        classList.add(new Class(classNumber,vacant,building_number,hours));
+                    }
+                    RecyclerView recyclerView = findViewById(R.id.recycle2);
+                    classAdapter = new ClassAdapter(classList);
+                    classAdapter.notifyDataSetChanged();
+                    recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+                    recyclerView.setAdapter(classAdapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);

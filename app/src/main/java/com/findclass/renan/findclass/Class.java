@@ -5,11 +5,13 @@ public class Class {
     String mClassNumber;
     String mVacant;
     String mInsideuilding;
+    String mHours;
 
-    public Class(String mClassNumber, String mVacant, String mInsideuilding) {
+    public Class(String mClassNumber, String mVacant, String mInsideuilding,String mHours) {
         this.mClassNumber = mClassNumber;
         this.mVacant = mVacant;
         this.mInsideuilding = mInsideuilding;
+        this.mHours = mHours;
     }
 
     public String getmClassNumber() {
@@ -22,5 +24,9 @@ public class Class {
 
     public String getmInsideuilding() {
         return mInsideuilding;
+    }
+
+    public String getmHours() {
+        return mHours;
     }
 }
