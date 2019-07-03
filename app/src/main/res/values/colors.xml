@@ -7,4 +7,5 @@
     <color name="green">#158F19</color>
     <color name="red">#D60A00</color>
     <color name="green_msg">#DAF7C1</color>
+    <color name="whiteTrans">#aaaa</color>
 </resources>
