@@ -37,4 +37,9 @@
     <string name="New_Message">הודעה חדשה</string>
     <string name="eror">קיימת שגיאה</string>
     <string name="Loging_please_wait...">מבצע התחברות, אנא המתן...</string>
+    <string name="building">בניין #</string>
+    <string name="classes">כיתה</string>
+    <string name="unavailable">תפוס</string>
+    <string name="available">פנוי</string>
+    <string name="classof">כיתות</string>
 </resources>

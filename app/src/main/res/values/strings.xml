@@ -39,4 +39,9 @@
     <string name="New_Message">New Message</string>
     <string name="eror">Eror</string>
     <string name="Loging_please_wait...">Loging please wait...</string>
+    <string name="building">Building #</string>
+    <string name="classes">Class</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="available">Available</string>
+    <string name="classof">Classes</string>
 </resources>
