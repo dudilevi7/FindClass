@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class LoginActivity extends AppCompatActivity {
@@ -75,11 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
                                 dialog.dismiss();
-                                finish();
+                                checkIfEmailVerified();
                             }
                             else {
                                 dialog.dismiss();
@@ -90,6 +88,24 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    //This function helps in verifying whether the email is verified or not.
+    private void checkIfEmailVerified(){
+        FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
+        boolean emailVerified = users.isEmailVerified();
+        if(!emailVerified){
+            Toast.makeText(this,"Verify the Email Id",Toast.LENGTH_SHORT).show();
+            auth.signOut();
+            finish();
+        }
+        else {
+            emailEt.getText().clear();
+            passwordEt.getText().clear();
+
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 }

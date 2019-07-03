@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private MaterialEditText username , password, email;
     private Button registerBtn;
-
+    private FirebaseUser firebaseUser;
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
     private ProgressDialog dialog;
@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-
+                            sendEmailVerification();
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             assert firebaseUser != null;
                             String userId = firebaseUser.getUid();
@@ -106,14 +106,17 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful())
                                     {
-                                        Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                      /*  Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                        dialog.dismiss();
+                                        startActivity(intent);*/
+
+                                        auth.signOut();
                                         finish();
                                     }
                                 }
                             });
+
+
                         }
                         else{
                             dialog.dismiss();
@@ -121,5 +124,22 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    //Email verification code using FirebaseUser object and using isSucccessful()function.
+    private void sendEmailVerification() {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser !=null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(RegisterActivity.this,"Check your Email for verification",Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                        finish();
+                    }
+                }
+            });
+        }
     }
 }
