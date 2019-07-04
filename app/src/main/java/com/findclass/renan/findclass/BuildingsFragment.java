@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class BuildingsFragment extends Fragment implements View.OnClickListener 
         RecyclerView recyclerView = view.findViewById(R.id.recycle);
         buildingAdapter = new BuildingAdapter(buildingsList);
         buildingAdapter.notifyDataSetChanged();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
         buildingAdapter.setListener(new BuildingAdapter.BuildingListener() {
             @Override
             public void onItemClicked(int position, View view) {

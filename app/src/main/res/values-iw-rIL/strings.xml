@@ -43,4 +43,6 @@
     <string name="available">פנוי</string>
     <string name="classof">כיתות</string>
     <string name="verification">אשר את המייל שנשלח אליך</string>
+    <string name="guest">אורח</string>
+    <string name="must_login">חייב להתחבר על מנת לפתוח את הצ\'אט</string>
 </resources>
