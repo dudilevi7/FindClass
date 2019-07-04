@@ -44,4 +44,5 @@
     <string name="unavailable">Unavailable</string>
     <string name="available">Available</string>
     <string name="classof">Classes</string>
+    <string name="verification">Check your Email for verification</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.findclass.renan.findclass.Adapter;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.findclass.renan.findclass.Building;
 import com.findclass.renan.findclass.Class;
 import com.findclass.renan.findclass.R;
 
@@ -32,7 +30,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
 
     @Override
     public ClassAdapter.ClassViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.classes_cell, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_classes, viewGroup, false);
         ClassAdapter.ClassViewHolder classViewHolder = new ClassAdapter.ClassViewHolder(view);
         return classViewHolder;
     }

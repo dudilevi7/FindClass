@@ -8,11 +8,29 @@
     android:orientation="vertical"
     tools:context=".BuildingsFragment">
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container"
-        android:layout_above="@id/bottom_nav"/>
+        android:layout_above="@id/bottom_nav"
+        android:layout_below="@+id/appbarLayout"/>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbarLayout">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle"/>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -22,31 +40,8 @@
         app:menu="@menu/bottom_nav"
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/bottom_nav_selctor"
-        app:itemTextColor="@color/bottom_nav_selctor"
-        />
+        app:itemTextColor="@color/bottom_nav_selctor" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            android:background="@color/colorPrimary"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/MenuStyle"/>
-    </com.google.android.material.appbar.AppBarLayout>
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:id="@+id/tab_layout"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:name="tab_layout"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        />
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
