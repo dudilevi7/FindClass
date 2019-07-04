@@ -107,7 +107,7 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
         String correctHour;
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH");
         currHour= Integer.parseInt(dateFormat.format(date));
-        if (fromHour<=currHour && currHour<=toHour){
+        if (fromHour<=currHour && currHour<toHour){
             correctHour = fromHour+":00 - "+toHour+":00";
         }else correctHour = "x";
         return correctHour;
