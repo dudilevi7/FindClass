@@ -42,4 +42,5 @@
     <string name="unavailable">תפוס</string>
     <string name="available">פנוי</string>
     <string name="classof">כיתות</string>
+    <string name="verification">אשר את המייל שנשלח אליך</string>
 </resources>

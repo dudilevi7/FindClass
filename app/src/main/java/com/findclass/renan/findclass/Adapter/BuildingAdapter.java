@@ -29,7 +29,7 @@ public class BuildingAdapter extends RecyclerView.Adapter<BuildingAdapter.Buildi
 
     @Override
     public BuildingViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.building_cell, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_building, viewGroup, false);
         BuildingViewHolder buildingViewHolder = new BuildingViewHolder(view);
         return buildingViewHolder;
     }

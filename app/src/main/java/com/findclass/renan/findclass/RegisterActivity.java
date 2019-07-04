@@ -1,7 +1,6 @@
 package com.findclass.renan.findclass;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -106,17 +105,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful())
                                     {
-                                      /*  Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);*/
-
                                         auth.signOut();
                                         finish();
                                     }
                                 }
                             });
-
-
                         }
                         else{
                             dialog.dismiss();
@@ -134,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(RegisterActivity.this,"Check your Email for verification",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this,getResources().getString(R.string.verification),Toast.LENGTH_SHORT).show();
                         FirebaseAuth.getInstance().signOut();
                         finish();
                     }

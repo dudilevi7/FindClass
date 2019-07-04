@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
@@ -19,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private BottomNavigationView navigation;
+    private Context context = this;
+
+    MapFragment mapFragment = new MapFragment(this);
+    BuildingsFragment buildingsFragment = new BuildingsFragment(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,39 +34,48 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-        tabLayout = findViewById(R.id.tab_layout);
+
         navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         viewPager = findViewById(R.id.view_pager); //Init Viewpager
-        setupFm(getSupportFragmentManager(), viewPager,this); //Setup Fragment
-        viewPager.setCurrentItem(0); //Set Currrent Item When Activity Start
-        viewPager.setOnPageChangeListener(new PageChange()); //Listeners For Viewpager When Page Changed
+        //setupFm( viewPager,this); //Setup Fragment
+        //viewPager.setCurrentItem(0); //Set Currrent Item When Activity Start
+        //viewPager.setOnPageChangeListener(new PageChange()); //Listeners For Viewpager When Page Changed
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                mapFragment).commit();
     }
 
-    public void setupFm(FragmentManager fragmentManager, ViewPager viewPager, Context context){
+    public void setupFm(ViewPager viewPager, Context context){
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.AddFragment(new MapFragment(this),  getResources().getString(R.string.Map));//Add Map fragment
-        viewPagerAdapter.AddFragment(new BuildingsFragment(this),  getResources().getString(R.string.Buildings));//Add buildings fragment
+        viewPagerAdapter.AddFragment(mapFragment,  getResources().getString(R.string.Map));//Add Map fragment
+        viewPagerAdapter.AddFragment(buildingsFragment,  getResources().getString(R.string.Buildings));//Add buildings fragment
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
     }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            Fragment selectedFragment = null;
+
             switch (item.getItemId()) {
                 case R.id.map:
-                    viewPager.setCurrentItem(0);
-                    return true;
+                    selectedFragment = mapFragment;
+                    break;
                 case R.id.Buildings:
-                    viewPager.setCurrentItem(1);
-                    return true;
+                    selectedFragment = buildingsFragment;
+                    break;
             }
-            return false;
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    selectedFragment).commit();
+
+            return true;
         }
     };
+
     public class PageChange implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
