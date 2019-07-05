@@ -80,6 +80,22 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
                     RecyclerView recyclerView = findViewById(R.id.recycle2);
                     classAdapter = new ClassAdapter(classList);
                     classAdapter.notifyDataSetChanged();
+                    classAdapter.setListener(new ClassAdapter.ClassListener() {
+                        @Override
+                        public void onItemClicked(int position, View view) {
+                            Class classTemp = classList.get(position);
+                            String vacant = classTemp.getmVacant();
+                            if (vacant.contains("yes")){
+                                Intent intent= new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void onLongItemClicked(int position, View view) {
+
+                        }
+                    });
                     recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
                     recyclerView.setAdapter(classAdapter);
                 } catch (JSONException e) {
