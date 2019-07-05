@@ -12,14 +12,16 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         app:cardElevation="@dimen/cardview_default_elevation"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="20dp">
 
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content">
+
            <de.hdodenhof.circleimageview.CircleImageView
                android:layout_width="50dp"
                android:layout_height="50dp"
+               android:layout_centerVertical="true"
                android:id="@+id/profile_image"
                android:src="@mipmap/ic_launcher"/>
 
@@ -31,6 +33,7 @@
                android:layout_toEndOf="@id/profile_image"
                android:layout_marginStart="60dp"
                android:layout_marginTop="15dp"
+               android:layout_centerVertical="true"
                android:textSize="18sp"/>
 
            <de.hdodenhof.circleimageview.CircleImageView

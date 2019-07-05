@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/username_tv"
+                android:id="@+id/username"
                 android:layout_marginLeft="25dp"
                 android:text="@string/Username"
                 android:textColor="@color/white"
