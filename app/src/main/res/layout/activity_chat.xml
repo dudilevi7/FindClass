@@ -22,15 +22,16 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="30dp"
+                android:layout_centerVertical="true"
                 android:layout_height="30dp"
                 android:id="@+id/profile_image"/>
-
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/username"
                 android:layout_marginLeft="25dp"
+                android:layout_centerVertical="true"
                 android:text="@string/Username"
                 android:textColor="@color/white"
                 android:textStyle="bold"

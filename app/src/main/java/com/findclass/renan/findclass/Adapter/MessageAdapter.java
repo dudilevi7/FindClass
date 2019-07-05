@@ -59,7 +59,7 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
         }
 
         if (position == mChat.size() -1){
-            if (chat.isSeen()){
+            if (chat.isIsseen()){
                 viewHolder.isSeenTv.setText(R.string.seen);
             }
             else {
@@ -85,8 +85,8 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
             super(itemView);
 
             show_messageTv = itemView.findViewById(R.id.show_msg_tv);
-            profile_imageIv =itemView.findViewById(R.id.profile_image);
-            isSeenTv =itemView.findViewById(R.id.seen_tv);
+            profile_imageIv = itemView.findViewById(R.id.profile_image);
+            isSeenTv = itemView.findViewById(R.id.seen_tv);
         }
     }
 

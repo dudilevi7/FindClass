@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -88,7 +87,7 @@ public class MessageActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        username = findViewById(R.id.username_tv);
+        username = findViewById(R.id.username);
         profile_image = findViewById(R.id.profile_image);
         snedBtn = findViewById(R.id.send_btn);
         sendEt = findViewById(R.id.text_send_editText);
@@ -147,7 +146,7 @@ public class MessageActivity extends AppCompatActivity {
                     chat.getSender().equals(userId))
                     {
                         HashMap<String, Object> hashMap = new HashMap();
-                        hashMap.put("isSeen",true);
+                        hashMap.put("isseen",true);
                         snapshot.getRef().updateChildren(hashMap);
                     }
                 }
@@ -168,7 +167,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender",sender);
         hashMap.put("receiver",receiver);
         hashMap.put("message",message);
-        hashMap.put("isSeen",false);
+        hashMap.put("isseen",false);
 
         databaseReference.child("Chats").push().setValue(hashMap);
 

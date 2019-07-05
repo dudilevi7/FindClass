@@ -18,7 +18,9 @@ import com.android.volley.toolbox.Volley;
 import com.findclass.renan.findclass.Adapter.ClassAdapter;
 import com.findclass.renan.findclass.Chat.ChatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +35,7 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
     FloatingActionButton floatingButton;
     private List<Class> classList;
     private ClassAdapter classAdapter;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +47,34 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.building)+building_number+" - "+getString(R.string.classof));
 
+        final View parentLayout = findViewById(android.R.id.content);
 
+        //Other stuff in OnCreate();
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         floatingButton = findViewById(R.id.chat_btn);
+
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
-                startActivity(intent);
+
+                if (firebaseUser != null)///////////////////////////////////////////need to change to every btn in cardview instead of the floatingButton
+                {
+                    Intent intent= new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Snackbar.make(parentLayout, getResources().getString(R.string.must_login), Snackbar.LENGTH_LONG)
+                            .setAction(getResources().getString(R.string.login), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent= new Intent(ClassesInBuildingActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(android.R.color.background_light ))
+                            .show();
+                }
             }
         });
         parseJSONClasses(building_number);
