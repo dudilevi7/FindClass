@@ -99,38 +99,36 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         LatLng HIT = new LatLng(32.014561,34.773860);
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(HIT,17),10000,null);
 
-        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
+            public void onInfoWindowClick(Marker marker) {
                 switch (marker.getTitle())
                 {
                     case "buildings1":case "בניין 1":
-                        startBuildingsActivity("1");
-                        break;
+                    startBuildingsActivity("1");
+                    break;
                     case "buildings2":case "בניין 2":
-                        startBuildingsActivity("2");
-                        break;
+                    startBuildingsActivity("2");
+                    break;
                     case "buildings3":case "בניין 3":
-                        startBuildingsActivity("3");
-                        break;
+                    startBuildingsActivity("3");
+                    break;
                     case "buildings4":case "בניין 4":
-                        startBuildingsActivity("4");
-                        break;
+                    startBuildingsActivity("4");
+                    break;
                     case "buildings5":case "בניין 5":
-                        startBuildingsActivity("5");
-                        break;
+                    startBuildingsActivity("5");
+                    break;
                     case "buildings6":case "בניין 6":
-                        startBuildingsActivity("6");
-                        break;
+                    startBuildingsActivity("6");
+                    break;
                     case "buildings7":case "בניין 7":
-                        startBuildingsActivity("7");
-                        break;
+                    startBuildingsActivity("7");
+                    break;
                     case "buildings8":case "בניין 8":
-                        startBuildingsActivity("8");
-                        break;
+                    startBuildingsActivity("8");
+                    break;
                 }
-
-                return false;
             }
         });
     }
