@@ -36,6 +36,7 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
     private List<Class> classList;
     private ClassAdapter classAdapter;
     private FirebaseUser firebaseUser;
+    private String adminId = "mjh3M3yH63YnWd6cSyY83a8uKL03";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +95,12 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
                             if (firebaseUser != null)
                             {
                                 if (vacant.contains("yes") ){
-                                    Intent intent= new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
-                                    startActivity(intent);
+                                    if (!firebaseUser.getUid().equals(adminId))
+                                    {
+                                        Intent intent= new Intent(ClassesInBuildingActivity.this, MessageActivity.class);
+                                        intent.putExtra("userid",adminId);
+                                        startActivity(intent);
+                                    }
                                 }
                             }
                             else {

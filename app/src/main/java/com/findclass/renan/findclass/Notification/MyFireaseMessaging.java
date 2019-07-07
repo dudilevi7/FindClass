@@ -111,7 +111,7 @@ public class MyFireaseMessaging extends FirebaseMessagingService {
 
         Intent broadcastIntent = new Intent(this, YesNotificationReceiver.class);
         Intent broadcastIntent1 = new Intent(this,NoNotificationReceiver.class);
-        
+
         broadcastIntent1.putExtra("toastMessage","Reject Your Request");
         broadcastIntent1.putExtra("user",user);
         broadcastIntent1.putExtra("j",j);
