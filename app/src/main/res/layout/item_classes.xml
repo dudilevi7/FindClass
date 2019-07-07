@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="120dp"
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     android:id="@+id/card_view_class"
     android:elevation="5dp"
     app:cardCornerRadius="4dp"
@@ -28,7 +28,7 @@
     </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:id="@+id/emptyorfull"
             android:text="@string/unavailable"
             android:textStyle="bold"
@@ -37,6 +37,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/hours"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/user_tv"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
         <ImageButton

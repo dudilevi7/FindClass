@@ -45,7 +45,7 @@ public class NoNotificationReceiver extends BroadcastReceiver {
 
         user = intent.getStringExtra("user");
 
-        if (msg.equals("Reject Your Request"))
+        if (msg.equals(context.getResources().getString(R.string.Reject_Request)))
         {
             sendMessage(firebaseUser.getUid(), user,msg);
         }

@@ -52,7 +52,7 @@ public class YesNotificationReceiver extends BroadcastReceiver {
 
         user = intent.getStringExtra("user");
 
-        if (msg.equals("Approved Your Request"))
+        if (msg.equals(context.getResources().getString(R.string.Approved_Request)))
         {
             sendMessage(firebaseUser.getUid(), user,msg);
         }

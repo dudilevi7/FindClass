@@ -108,12 +108,19 @@ public class MyFireaseMessaging extends FirebaseMessagingService {
 
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Intent broadcastIntent = new Intent(this, YesNotificationReceiver.class);
-        broadcastIntent.putExtra("toastMessage",body);
-        PendingIntent actionApprovedIntent = PendingIntent.getBroadcast(this,j,broadcastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
-        broadcastIntent.putExtra("toastMessage",body);
-        PendingIntent actionRejectIntent = PendingIntent.getBroadcast(this,j,broadcastIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent broadcastIntent = new Intent(this, YesNotificationReceiver.class);
+        Intent broadcastIntent1 = new Intent(this,NoNotificationReceiver.class);
+        
+        broadcastIntent1.putExtra("toastMessage","Reject Your Request");
+        broadcastIntent1.putExtra("user",user);
+        broadcastIntent1.putExtra("j",j);
+        PendingIntent actionRejectIntent = PendingIntent.getBroadcast(this,j,broadcastIntent1,PendingIntent.FLAG_ONE_SHOT);
+
+        broadcastIntent.putExtra("toastMessage","Approved Your Request");
+        broadcastIntent.putExtra("user",user);
+        broadcastIntent.putExtra("j",j);
+        PendingIntent actionApprovedIntent = PendingIntent.getBroadcast(this,j,broadcastIntent,PendingIntent.FLAG_ONE_SHOT);
 
 
         OreoNotification oreoNotification = new OreoNotification(this);

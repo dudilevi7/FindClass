@@ -45,4 +45,8 @@
     <string name="verification">אשר את המייל שנשלח אליך</string>
     <string name="guest">אורח</string>
     <string name="must_login">חייב להתחבר על מנת לפתוח את הצ\'אט</string>
+    <string name="lector">על ידי מרצה</string>
+    <string name="student">על ידי</string>
+    <string name="Reject_Request">בקשתך נדחתה</string>
+    <string name="Approved_Request">בקשתך אושרה</string>
 </resources>
