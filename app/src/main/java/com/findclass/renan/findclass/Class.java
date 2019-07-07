@@ -6,12 +6,14 @@ public class Class {
     String mVacant;
     String mInsideuilding;
     String mHours;
+    String mUser;
 
-    public Class(String mClassNumber, String mVacant, String mInsideuilding,String mHours) {
+    public Class(String mClassNumber, String mVacant, String mInsideuilding,String mHours,String mUser) {
         this.mClassNumber = mClassNumber;
         this.mVacant = mVacant;
         this.mInsideuilding = mInsideuilding;
         this.mHours = mHours;
+        this.mUser = mUser;
     }
 
     public String getmClassNumber() {
@@ -29,4 +31,9 @@ public class Class {
     public String getmHours() {
         return mHours;
     }
+
+    public String getmUser() {
+        return mUser;
+    }
+
 }

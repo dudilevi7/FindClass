@@ -44,6 +44,10 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             classViewHolder.vacantColor.setBackgroundColor(classViewHolder.itemView.getResources().getColor(R.color.red));
             classViewHolder.mAvailable.setText(classViewHolder.itemView.getResources().getString(R.string.unavailable));
             classViewHolder.mHours.setText(classTemp.getmHours()+"");
+            if (classTemp.getmUser().contains("lector")) {
+                classViewHolder.mUser.setText(classViewHolder.itemView.getResources().getString(R.string.lector));
+            }else classViewHolder.mUser.setText(classViewHolder.itemView.getResources().getString(R.string.student)+" "+
+                    classTemp.getmUser());
         }if(classTemp.getmVacant().contains("yes")){
             classViewHolder.vacantColor.setBackgroundColor(classViewHolder.itemView.getResources().getColor(R.color.green));
             classViewHolder.mAvailable.setText(classViewHolder.itemView.getResources().getString(R.string.available));
@@ -60,6 +64,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         private TextView mClassNumber;
         private TextView mAvailable;
         private TextView mHours;
+        private TextView mUser;
         private LinearLayout vacantColor;
 
         public ClassViewHolder(View itemView) {
@@ -69,6 +74,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             mAvailable = itemView.findViewById(R.id.emptyorfull);
             vacantColor = itemView.findViewById(R.id.vacant_color_cell);
             mHours = itemView.findViewById(R.id.hours);
+            mUser = itemView.findViewById(R.id.user_tv);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

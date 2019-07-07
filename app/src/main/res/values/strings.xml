@@ -46,4 +46,6 @@
     <string name="verification">Check your Email for verification</string>
     <string name="guest">Enter as guest</string>
     <string name="must_login">You must login to open the chat</string>
+    <string name="lector">By Lecturer</string>
+    <string name="student">"By "</string>
 </resources>

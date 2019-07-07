@@ -47,36 +47,9 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.building)+building_number+" - "+getString(R.string.classof));
 
-        final View parentLayout = findViewById(android.R.id.content);
-
         //Other stuff in OnCreate();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        floatingButton = findViewById(R.id.chat_btn);
-
-        floatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (firebaseUser != null)///////////////////////////////////////////need to change to every btn in cardview instead of the floatingButton
-                {
-                    Intent intent= new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
-                    startActivity(intent);
-                }
-                else {
-                    Snackbar.make(parentLayout, getResources().getString(R.string.must_login), Snackbar.LENGTH_LONG)
-                            .setAction(getResources().getString(R.string.login), new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Intent intent= new Intent(ClassesInBuildingActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                }
-                            })
-                            .setActionTextColor(getResources().getColor(android.R.color.background_light ))
-                            .show();
-                }
-            }
-        });
         parseJSONClasses(building_number);
 
     }
@@ -94,12 +67,20 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
                         JSONObject object = rows.getJSONObject(i);
                         String classNumber = object.getString("class");
                         String vacant = object.getString("vacant");
-                        int fromHour = object.getInt("from");
-                        int toHour = object.getInt("to");
+                        String user = object.getString("user");
+                        int fromHour,toHour;
+                        fromHour = object.getInt("from1");
+                        toHour = object.getInt("to1");
+                        if (!((!user.contains("lector")) && checkIfOver(fromHour,toHour,user))) {
+                            fromHour = object.getInt("from");
+                            toHour = object.getInt("to");
+                            user = "lector";
+                        }
                         String hours = checkTime(fromHour,toHour);
-                        if (hours.contains("x")) vacant ="yes";
+                        //^^ return the hours if the class is cathed , else return "x"
+                        if (hours.contains("x")) vacant ="yes";  // if "x" the class is vacant(empty)
                         else vacant = "no";
-                        classList.add(new Class(classNumber,vacant,building_number,hours));
+                        classList.add(new Class(classNumber,vacant,building_number,hours,user));
                     }
                     RecyclerView recyclerView = findViewById(R.id.recycle2);
                     classAdapter = new ClassAdapter(classList);
@@ -107,11 +88,27 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
                     classAdapter.setListener(new ClassAdapter.ClassListener() {
                         @Override
                         public void onItemClicked(int position, View view) {
+                            View parentLayout = findViewById(android.R.id.content);
                             Class classTemp = classList.get(position);
                             String vacant = classTemp.getmVacant();
-                            if (vacant.contains("yes")){
-                                Intent intent= new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
-                                startActivity(intent);
+                            if (firebaseUser != null)
+                            {
+                                if (vacant.contains("yes") ){
+                                    Intent intent= new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                            else {
+                                Snackbar.make(parentLayout, getResources().getString(R.string.must_login), Snackbar.LENGTH_LONG)
+                                        .setAction(getResources().getString(R.string.login), new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Intent intent= new Intent(ClassesInBuildingActivity.this, LoginActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        })
+                                        .setActionTextColor(getResources().getColor(android.R.color.background_light ))
+                                        .show();
                             }
                         }
 
@@ -133,6 +130,18 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(request);
+    }
+
+    private Boolean checkIfOver(int fromHour, int toHour, String user) {
+        //function that checked if the user lector is finished/
+        Date date = Calendar.getInstance().getTime();
+        int currHour ;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH"); //take only the curr hour
+        currHour= Integer.parseInt(dateFormat.format(date));
+        if(currHour>= toHour || currHour<fromHour){ //check if the curr hour >= finished hour of the class was caught by user
+            return false;
+        }
+        return true;
     }
 
     private String checkTime(int fromHour, int toHour) {
