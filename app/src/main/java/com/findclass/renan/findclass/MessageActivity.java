@@ -167,6 +167,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender",sender);
         hashMap.put("receiver",receiver);
         hashMap.put("message",message);
+
         hashMap.put("isseen",false);
 
         databaseReference.child("Chats").push().setValue(hashMap);
@@ -278,7 +279,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private  void  currentUsers(String userId){
+    private  void currentUser(String userId){
         SharedPreferences.Editor editor = getSharedPreferences("Prefs",MODE_PRIVATE).edit();
         editor.putString("currentuser",userId);
         editor.apply();
@@ -298,7 +299,7 @@ public class MessageActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         status("online");
-        currentUsers(userId);
+        currentUser(userId);
     }
 
     @Override
@@ -306,6 +307,6 @@ public class MessageActivity extends AppCompatActivity {
         super.onPause();
         databaseReference.removeEventListener(seenListener);
         status("offline");
-        currentUsers("none");
+        currentUser("none");
     }
 }

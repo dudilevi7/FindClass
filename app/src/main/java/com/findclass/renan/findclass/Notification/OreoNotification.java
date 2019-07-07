@@ -10,6 +10,8 @@ import android.content.ContextWrapper;
 import android.net.Uri;
 import android.os.Build;
 
+import com.findclass.renan.findclass.R;
+
 public class OreoNotification extends ContextWrapper {
     public static final String CHANNEL_ID ="com.findclass.renan.findclass";
     public static final String CHANNEL_NAME ="findclass";
@@ -54,5 +56,24 @@ public class OreoNotification extends ContextWrapper {
                 .setSound(soundUri)
                 .setAutoCancel(true);
     }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    public Notification.Builder getManegerOreoNotification(String title, String body,
+                                                    PendingIntent pendingIntent,
+                                                    PendingIntent actionApprovedIntent,
+                                                    PendingIntent actionRejectIntent,
+                                                    Uri soundUri, String icon)
+    {
+        return  new Notification.Builder(getApplicationContext(),CHANNEL_ID)
+                .setContentIntent(pendingIntent)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setSmallIcon(Integer.parseInt(icon))
+                .setSound(soundUri)
+                .addAction(R.mipmap.ic_launcher,"Approved",actionApprovedIntent)
+                .addAction(R.mipmap.ic_launcher,"Reject",actionRejectIntent)
+                .setAutoCancel(true);
+    }
+
 
 }
