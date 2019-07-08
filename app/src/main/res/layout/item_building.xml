@@ -18,8 +18,15 @@
             android:layout_height="wrap_content"
             android:text="Building #1"
             android:layout_gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/cardview_shadow_start_color"
             android:textSize="33sp"
             android:id="@+id/building_number_tv"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:id="@+id/mosad_iv"
+            android:src="@drawable/hit"/>
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

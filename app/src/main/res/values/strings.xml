@@ -38,7 +38,7 @@
     <string name="New_Message">New Message</string>
     <string name="eror">Eror</string>
     <string name="Loging_please_wait...">Loging please wait...</string>
-    <string name="building">Building #</string>
+    <string name="building">"Building "</string>
     <string name="classes">Class</string>
     <string name="unavailable">Unavailable</string>
     <string name="available">Available</string>
@@ -50,4 +50,11 @@
     <string name="student">"By "</string>
     <string name="Reject_Request">Reject Your Request</string>
     <string name="Approved_Request">Approved Your Request</string>
+    <string name="educational_institutions">Educational institution</string>
+    <string name="hit">Holon Institute Technology</string>
+    <string name="collegemanage">College of Management</string>
+    <string name="onoacademic">Ono Academic</string>
+    <string name="tlvacademic">Tel Aviv-Yafo Academic</string>
+    <string name="sce">SCE</string>
+    <string name="select_institute">You have to select an educational institution</string>
 </resources>

@@ -37,7 +37,7 @@
     <string name="New_Message">הודעה חדשה</string>
     <string name="eror">קיימת שגיאה</string>
     <string name="Loging_please_wait...">מבצע התחברות, אנא המתן...</string>
-    <string name="building">בניין #</string>
+    <string name="building">"בניין "</string>
     <string name="classes">כיתה</string>
     <string name="unavailable">תפוס</string>
     <string name="available">פנוי</string>
@@ -49,4 +49,11 @@
     <string name="student">על ידי</string>
     <string name="Reject_Request">בקשתך נדחתה</string>
     <string name="Approved_Request">בקשתך אושרה</string>
+    <string name="educational_institutions">מוסד לימודים</string>
+    <string name="collegemanage">המכללה למנהל</string>
+    <string name="hit">המכון הטכנולוגי חולון</string>
+    <string name="onoacademic">האקדמית אונו</string>
+    <string name="tlvacademic">האקדמית ת\'\'א-יפו</string>
+    <string name="sce">מכללת סמי שמעון</string>
+    <string name="select_institute">בחר מוסד לימודים</string>
 </resources>

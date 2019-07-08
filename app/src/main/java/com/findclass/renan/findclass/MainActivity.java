@@ -11,15 +11,25 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.findclass.renan.findclass.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private BottomNavigationView navigation;
+    private String institute;
+    private DatabaseReference databaseReference;
     private Context context = this;
 
     MapFragment mapFragment = new MapFragment(this);
@@ -32,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle(getString(getMosadName()));
 
 
         navigation = findViewById(R.id.bottom_nav);
@@ -44,6 +54,32 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 mapFragment).commit();
+    }
+
+    private int getMosadName() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser==null) return R.string.hit;
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                institute = user.getInstitute();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        switch (institute){
+            case "HIT": return R.string.hit;
+            case "manage" : return R.string.collegemanage;
+            case "ONO" : return R.string.onoacademic;
+            case "SCE": return R.string.sce;
+            case "TLV": return R.string.tlvacademic;
+        }
+        return R.string.hit;
     }
 
     public void setupFm(ViewPager viewPager, Context context){

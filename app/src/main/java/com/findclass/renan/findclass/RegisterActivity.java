@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.findclass.renan.findclass.Adapter.InstitutiosAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -20,22 +23,59 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    private String institution;
     private MaterialEditText username , password, email;
     private Button registerBtn;
     private FirebaseUser firebaseUser;
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
     private ProgressDialog dialog;
+    private ExpandableListView listView;
+    private InstitutiosAdapter institutiosAdapter;
+    private List<String> headerList;
+    private HashMap<String,List<Integer>> listHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        listView = findViewById(R.id.institutions);
+        initData();
+        institutiosAdapter = new InstitutiosAdapter(this,headerList,listHashMap);
+        listView.setAdapter(institutiosAdapter);
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                switch (childPosition){
+                    case 0:
+                        Toast.makeText(getApplicationContext(),getString(R.string.hit),Toast.LENGTH_SHORT).show();
+                        institution = "HIT";
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(),getString(R.string.collegemanage),Toast.LENGTH_SHORT).show();
+                        institution = "manage";
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(),getString(R.string.onoacademic),Toast.LENGTH_SHORT).show();
+                        institution = "ONO";
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(),getString(R.string.tlvacademic),Toast.LENGTH_SHORT).show();
+                        institution = "TLV";
+                        break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(),getString(R.string.sce),Toast.LENGTH_SHORT).show();
+                        institution = "SCE";
+                        break;
+                }
+                return false;
+            }
+        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.Register);
@@ -69,12 +109,29 @@ public class RegisterActivity extends AppCompatActivity {
                 }else if (input_password.length()<6){
                     Toast.makeText(RegisterActivity.this,getResources().getString(R.string.password_greater_6),Toast.LENGTH_SHORT).show();
                     return;
+                }else if (TextUtils.isEmpty(institution)){
+                    Toast.makeText(RegisterActivity.this,getResources().getString(R.string.select_institute),Toast.LENGTH_SHORT).show();
                 }
                 else {
                     register(input_username,input_email,input_password);
                 }
             }
         });
+    }
+
+    private void initData() {
+        headerList = new ArrayList<>();
+        listHashMap = new HashMap<>();
+
+        headerList.add(getResources().getString(R.string.educational_institutions));
+        List<Integer> institutios = new ArrayList<>();
+        institutios.add(R.drawable.hit);
+        institutios.add(R.drawable.manage_college);
+        institutios.add(R.drawable.ono_academic);
+        institutios.add(R.drawable.tlv_academic);
+        institutios.add(R.drawable.sammyshimon);
+
+        listHashMap.put(headerList.get(0),institutios);
     }
 
     private void register(final String username , String email, String password)
@@ -99,6 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("username",username);
                             hashMap.put("imageURL","default");
                             hashMap.put("status","offline");
+                            hashMap.put("institute",institution);
 
                             databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
