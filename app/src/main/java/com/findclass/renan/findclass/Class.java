@@ -3,12 +3,12 @@ package com.findclass.renan.findclass;
 public class Class {
 
     String mClassNumber;
-    String mVacant;
+    boolean mVacant;
     String mInsideuilding;
     String mHours;
     String mUser;
 
-    public Class(String mClassNumber, String mVacant, String mInsideuilding,String mHours,String mUser) {
+    public Class(String mClassNumber, boolean mVacant, String mInsideuilding,String mHours,String mUser) {
         this.mClassNumber = mClassNumber;
         this.mVacant = mVacant;
         this.mInsideuilding = mInsideuilding;
@@ -20,7 +20,7 @@ public class Class {
         return mClassNumber;
     }
 
-    public String getmVacant() {
+    public boolean getmVacant() {
         return mVacant;
     }
 

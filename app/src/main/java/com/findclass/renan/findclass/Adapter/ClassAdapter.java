@@ -40,17 +40,15 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         Class classTemp = list.get(i);
         classViewHolder.mClassNumber.setText(classViewHolder.itemView.getResources().getString(R.string.classes)+" "+
                 classTemp.getmClassNumber());
-        if (classTemp.getmVacant().contains("no")){
+        if (classTemp.getmVacant()){
+            classViewHolder.vacantColor.setBackgroundColor(classViewHolder.itemView.getResources().getColor(R.color.green));
+            classViewHolder.mAvailable.setText(classViewHolder.itemView.getResources().getString(R.string.available));
+        }else{
             classViewHolder.vacantColor.setBackgroundColor(classViewHolder.itemView.getResources().getColor(R.color.red));
             classViewHolder.mAvailable.setText(classViewHolder.itemView.getResources().getString(R.string.unavailable));
             classViewHolder.mHours.setText(classTemp.getmHours()+"");
-            if (classTemp.getmUser().contains("lector")) {
-                classViewHolder.mUser.setText(classViewHolder.itemView.getResources().getString(R.string.lector));
-            }else classViewHolder.mUser.setText(classViewHolder.itemView.getResources().getString(R.string.student)+" "+
+            classViewHolder.mUser.setText(classViewHolder.itemView.getResources().getString(R.string.student)+" "+
                     classTemp.getmUser());
-        }if(classTemp.getmVacant().contains("yes")){
-            classViewHolder.vacantColor.setBackgroundColor(classViewHolder.itemView.getResources().getColor(R.color.green));
-            classViewHolder.mAvailable.setText(classViewHolder.itemView.getResources().getString(R.string.available));
         }
     }
 

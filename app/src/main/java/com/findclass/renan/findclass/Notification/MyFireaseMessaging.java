@@ -22,6 +22,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFireaseMessaging extends FirebaseMessagingService {
 
+    private String adminId = "mjh3M3yH63YnWd6cSyY83a8uKL03";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -36,11 +37,11 @@ public class MyFireaseMessaging extends FirebaseMessagingService {
 
         if (firebaseUser != null && sented.equals(firebaseUser.getUid()))
         {
-            if (!currentUser.equals(user))
+            if (!currentUser.equals(sented))
             {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 {
-                    if (firebaseUser.getUid().equals("mjh3M3yH63YnWd6cSyY83a8uKL03"))
+                    if (firebaseUser.getUid().equals(adminId))
                     {
                         sendManegerOreoNotification(remoteMessage);
                     }
@@ -49,7 +50,7 @@ public class MyFireaseMessaging extends FirebaseMessagingService {
                     }
                 }
                 else {
-                    if (firebaseUser.getUid().equals("mjh3M3yH63YnWd6cSyY83a8uKL03"))
+                    if (firebaseUser.getUid().equals(adminId))
                     {
                         sendManegerNotification(remoteMessage);
                     }
@@ -112,12 +113,12 @@ public class MyFireaseMessaging extends FirebaseMessagingService {
         Intent broadcastIntent = new Intent(this, YesNotificationReceiver.class);
         Intent broadcastIntent1 = new Intent(this,NoNotificationReceiver.class);
 
-        broadcastIntent1.putExtra("toastMessage","Reject Your Request");
+        broadcastIntent1.putExtra("toastMessage",getResources().getString(R.string.Reject_Request));
         broadcastIntent1.putExtra("user",user);
         broadcastIntent1.putExtra("j",j);
         PendingIntent actionRejectIntent = PendingIntent.getBroadcast(this,j,broadcastIntent1,PendingIntent.FLAG_ONE_SHOT);
 
-        broadcastIntent.putExtra("toastMessage","Approved Your Request");
+        broadcastIntent.putExtra("toastMessage",getResources().getString(R.string.Approved_Request));
         broadcastIntent.putExtra("user",user);
         broadcastIntent.putExtra("j",j);
         PendingIntent actionApprovedIntent = PendingIntent.getBroadcast(this,j,broadcastIntent,PendingIntent.FLAG_ONE_SHOT);
@@ -190,12 +191,12 @@ public class MyFireaseMessaging extends FirebaseMessagingService {
         Intent broadcastIntent1 = new Intent(this,NoNotificationReceiver.class);
 
 
-        broadcastIntent1.putExtra("toastMessage","Reject Your Request");
+        broadcastIntent1.putExtra("toastMessage",getResources().getString(R.string.Reject_Request));
         broadcastIntent1.putExtra("user",user);
         broadcastIntent1.putExtra("j",j);
         PendingIntent actionRejectIntent = PendingIntent.getBroadcast(this,j,broadcastIntent1,PendingIntent.FLAG_ONE_SHOT);
 
-        broadcastIntent.putExtra("toastMessage","Approved Your Request");
+        broadcastIntent.putExtra("toastMessage",getResources().getString(R.string.Approved_Request));
         broadcastIntent.putExtra("user",user);
         broadcastIntent.putExtra("j",j);
         PendingIntent actionApprovedIntent = PendingIntent.getBroadcast(this,j,broadcastIntent,PendingIntent.FLAG_ONE_SHOT);
