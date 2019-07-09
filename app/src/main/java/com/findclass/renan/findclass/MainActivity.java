@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                institute = user.getInstitute();
+                institute = user.getUsername();
             }
 
             @Override
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         switch (institute){
-            case "HIT": return R.string.hit;
+            case "hit": return R.string.hit;
             case "manage" : return R.string.collegemanage;
             case "ONO" : return R.string.onoacademic;
             case "SCE": return R.string.sce;

@@ -45,7 +45,7 @@
     <string name="classof">Classes</string>
     <string name="verification">Check your Email for verification</string>
     <string name="guest">Enter as guest</string>
-    <string name="must_login">You must login to open the chat</string>
+    <string name="must_login">You must login to open the class schedule</string>
     <string name="lector">By Lecturer</string>
     <string name="student">"By "</string>
     <string name="Reject_Request">Reject Your Request</string>
@@ -57,4 +57,7 @@
     <string name="tlvacademic">Tel Aviv-Yafo Academic</string>
     <string name="sce">SCE</string>
     <string name="select_institute">You have to select an educational institution</string>
+    <string name="schedule">Schedule</string>
+    <string name="ofday">of</string>
+    <string name="getclass">Get the class</string>
 </resources>

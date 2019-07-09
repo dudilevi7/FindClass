@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                 switch (childPosition){
                     case 0:
                         Toast.makeText(getApplicationContext(),getString(R.string.hit),Toast.LENGTH_SHORT).show();
-                        institution = "HIT";
+                        institution = "hit";
                         break;
                     case 1:
                         Toast.makeText(getApplicationContext(),getString(R.string.collegemanage),Toast.LENGTH_SHORT).show();

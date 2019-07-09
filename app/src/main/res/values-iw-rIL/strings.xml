@@ -44,7 +44,7 @@
     <string name="classof">כיתות</string>
     <string name="verification">אשר את המייל שנשלח אליך</string>
     <string name="guest">אורח</string>
-    <string name="must_login">חייב להתחבר על מנת לפתוח את הצ\'אט</string>
+    <string name="must_login">חייב להתחבר על מנת לפתוח מערכת שעות</string>
     <string name="lector">על ידי מרצה</string>
     <string name="student">על ידי</string>
     <string name="Reject_Request">בקשתך נדחתה</string>
@@ -56,4 +56,7 @@
     <string name="tlvacademic">האקדמית ת\'\'א-יפו</string>
     <string name="sce">מכללת סמי שמעון</string>
     <string name="select_institute">בחר מוסד לימודים</string>
+    <string name="schedule">מערכת שעות</string>
+    <string name="ofday">ליום</string>
+    <string name="getclass">תאם את הכיתה</string>
 </resources>
