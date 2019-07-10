@@ -5,17 +5,19 @@
     android:layout_marginTop="10dp"
     android:padding="10dp">
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="15dp"
-    android:text="hour"
-    android:id="@+id/hours_display"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textColor="#000"
+        android:text="hour"
+        android:id="@+id/hours_display"/>
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="15dp"
-    android:layout_toEndOf="@+id/hours_display"
-    android:text="user"
-    android:id="@+id/user_tv"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textColor="#000"
+        android:layout_toEndOf="@+id/hours_display"
+        android:text="user"
+        android:id="@+id/user_tv"/>
 
 </RelativeLayout>

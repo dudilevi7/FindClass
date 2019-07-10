@@ -120,7 +120,7 @@ public class YesNotificationReceiver extends BroadcastReceiver {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren())
                 {
                     Token token = snapshot.getValue(Token.class);
-                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher,"Admin " +": "+ msg,context.getResources().getString(R.string.New_Message),
+                    Data data = new Data(firebaseUser.getUid(), R.mipmap.find_class,"Admin " +": "+ msg,context.getResources().getString(R.string.New_Message),
                             receiver);
 
                     Sender sender = new Sender(data,token.getToken());

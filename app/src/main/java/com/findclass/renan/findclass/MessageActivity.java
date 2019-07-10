@@ -219,7 +219,7 @@ public class MessageActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren())
                 {
                     Token token = snapshot.getValue(Token.class);
-                    Data data = new Data(firebaseUser.getUid(),R.mipmap.ic_launcher,username +": "+ msg,getResources().getString(R.string.New_Message),
+                    Data data = new Data(firebaseUser.getUid(),R.mipmap.find_class,username +": "+ msg,getResources().getString(R.string.New_Message),
                             userId);
 
                     Sender sender = new Sender(data,token.getToken());
