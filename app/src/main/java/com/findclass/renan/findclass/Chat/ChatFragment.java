@@ -97,26 +97,27 @@ public class ChatFragment extends Fragment {
                 mUsers.clear();
                 for (DataSnapshot snapshot: dataSnapshot.getChildren())
                 {
-                    user = snapshot.getValue(User.class);
-                    for (Chatlist chatlist: usersList)
-                    {
-                        new Thread(){
-                            @Override
-                            public void run() {
-                                super.run();
-                                try {
-                                    fireId = firebaseUser.getUid();
-                                    if (!user.getId().equals(fireId)) {
+                    final User user = snapshot.getValue(User.class);
+
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {
+                                for (Chatlist chatlist: usersList)
+                                {
+                                    if (user.getId().equals(chatlist.getId()))
+                                    {
                                         mUsers.add(user);
                                     }
-                                }catch (Exception e){
-                                    e.printStackTrace();
                                 }
-
+                            }catch (Exception e){
+                                e.printStackTrace();
                             }
 
-                        }.start();
-                    }
+                        }
+
+                    }.start();
                 }
                 userAdapter = new UserAdapter(getContext(), mUsers, true);
                 recyclerView.setAdapter(userAdapter);

@@ -9,17 +9,15 @@
     tools:context=".StartActivity">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Find Class"
-        android:textSize="25sp"
-        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:src="@drawable/findclass3"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/login_btn"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"

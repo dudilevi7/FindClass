@@ -39,7 +39,7 @@ public class UsersFragment extends Fragment {
     private FirebaseUser firebaseUser;
     private MenuItem searchItem;
     private  String fireId;
-    private User user;
+
 
     public UsersFragment() {
     }
@@ -71,7 +71,7 @@ public class UsersFragment extends Fragment {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
-                    user = snapshot.getValue(User.class);
+                   final User user = snapshot.getValue(User.class);
 
                     assert user != null;
                     assert firebaseUser !=null;

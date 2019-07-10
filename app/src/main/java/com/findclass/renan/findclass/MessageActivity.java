@@ -231,7 +231,7 @@ public class MessageActivity extends AppCompatActivity {
                                     {
                                         if (response.body().getSuccess() != 1 )
                                         {
-                                            Toast.makeText(MessageActivity.this, getResources().getString(R.string.eror), Toast.LENGTH_SHORT).show();
+                                           // Toast.makeText(MessageActivity.this, getResources().getString(R.string.eror), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
