@@ -30,6 +30,7 @@ public class BuildingAdapter extends RecyclerView.Adapter<BuildingAdapter.Buildi
     private BuildingListener listener ;
     private DatabaseReference databaseReference;
     private String mosad;
+    private int mosadImage;
 
     public interface BuildingListener
     {
@@ -49,45 +50,51 @@ public class BuildingAdapter extends RecyclerView.Adapter<BuildingAdapter.Buildi
     }
 
     @Override
-    public void onBindViewHolder(BuildingAdapter.BuildingViewHolder buildingViewHolder, int i) {
+    public void onBindViewHolder(final BuildingAdapter.BuildingViewHolder buildingViewHolder, int i) {
         Building buildingTemp = list.get(i);
         buildingViewHolder.mBuildingNumber.setText(buildingViewHolder.itemView.getResources().getString(R.string.building)
                 +buildingTemp.getmBuildingNumber());
-        int building_Image = getInstituteImage();
-        buildingViewHolder.mInstituteIv.setImageResource(building_Image);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser==null) {
+            mosadImage = R.drawable.hit;
+            buildingViewHolder.mInstituteIv.setImageResource(mosadImage);
+        } else {
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    mosad = user.getInstitute();
+                    switch (mosad) {
+                        case "hit":
+                            mosadImage = R.drawable.hit;
+                            break;
+                        case "manage":
+                            mosadImage = R.drawable.manage_college;
+                            break;
+                        case "ONO":
+                            mosadImage = R.drawable.ono_academic;
+                            break;
+                        case "SCE":
+                            mosadImage = R.drawable.sammyshimon;
+                            break;
+                        case "TLV":
+                            mosadImage = R.drawable.tlv_academic;
+                            break;
+                    }
+                    buildingViewHolder.mInstituteIv.setImageResource(mosadImage);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
       //  buildingViewHolder.mBuildingName.setText(buildingTemp.getmBuildingName());
     }
 
-    private int getInstituteImage() {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser==null) return R.drawable.hit;
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                mosad = user.getInstitute();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        switch (mosad){
-            case "HIT":
-                return R.drawable.hit;
-            case "manage":
-                return R.drawable.manage_college;
-            case "ONO":
-                return R.drawable.ono_academic;
-            case "TLV":
-                return R.drawable.tlv_academic;
-            case "SCE":
-                return R.drawable.sammyshimon;
-        }
-        return R.drawable.hit;
-    }
 
     @Override
     public int getItemCount() {

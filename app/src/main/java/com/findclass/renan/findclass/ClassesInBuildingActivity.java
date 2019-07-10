@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.findclass.renan.findclass.Adapter.ClassAdapter;
 import com.findclass.renan.findclass.Adapter.ScheduleAdapter;
+import com.findclass.renan.findclass.Chat.ChatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,8 +48,9 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
     private ScheduleAdapter scheduleAdapter;
     private ClassAdapter classAdapter;
     private FirebaseUser firebaseUser;
-    private String adminId = "mjh3M3yH63YnWd6cSyY83a8uKL03";
+    private String adminId = "n4XdU5nhXEdCFBN0byQs7NtWRO93";
     private ProgressBar progressBar,progressBarDialog;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
         //Other stuff in OnCreate();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser==null) flag = false;
         parseJSONClasses(building_number);
 
     }
@@ -237,11 +241,19 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId())
         {
+            case R.id.chat:
+                intent = new Intent(ClassesInBuildingActivity.this, ChatActivity.class);
+                if (flag)
+                startActivity(intent);
+                else Toast.makeText(getApplicationContext(),getString(R.string.must_login2),Toast.LENGTH_SHORT).show();
+                //finish();
+                return true;
             case R.id.Logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(ClassesInBuildingActivity.this,StartActivity.class);
+                intent = new Intent(ClassesInBuildingActivity.this,StartActivity.class);
                 startActivity(intent);
                 finish();
                 return true;

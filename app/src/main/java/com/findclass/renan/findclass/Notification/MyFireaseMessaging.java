@@ -22,7 +22,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFireaseMessaging extends FirebaseMessagingService {
 
-    private String adminId = "mjh3M3yH63YnWd6cSyY83a8uKL03";
+    private String adminId = "n4XdU5nhXEdCFBN0byQs7NtWRO93";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "336725556730-otq8r7gasbh1jnafj7b3f3p7j97k5nj5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.findclass.renan.findclass",
+            "certificate_hash": "4bc986b37f375807719b78be5d875d3ca7285ae1"
+          }
+        },
+        {
           "client_id": "336725556730-4153m3ltrkaf7gajv2ln6i33a769plrs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

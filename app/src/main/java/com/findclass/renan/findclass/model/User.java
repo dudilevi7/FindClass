@@ -3,10 +3,10 @@ package com.findclass.renan.findclass.model;
 public class User {
 
     private String id;
-    private String username;
     private String imageURL;
-    private String status;
     private String institute;
+    private String status;
+    private String username;
 
     public User(String id, String username, String imageURL, String status ,String institute) {
         this.id = id;

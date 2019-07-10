@@ -60,4 +60,7 @@
     <string name="schedule">Schedule</string>
     <string name="ofday">of</string>
     <string name="getclass">Get the class</string>
+    <string name="logout">Log out</string>
+    <string name="chat">Chat</string>
+    <string name="must_login2">You must login for using the chat</string>
 </resources>

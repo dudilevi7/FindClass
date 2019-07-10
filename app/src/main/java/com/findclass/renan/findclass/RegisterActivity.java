@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
-    private String institution;
+    private String institute ;
     private MaterialEditText username , password, email;
     private Button registerBtn;
     private FirebaseUser firebaseUser;
@@ -54,23 +54,23 @@ public class RegisterActivity extends AppCompatActivity {
                 switch (childPosition){
                     case 0:
                         Toast.makeText(getApplicationContext(),getString(R.string.hit),Toast.LENGTH_SHORT).show();
-                        institution = "hit";
+                        institute = "hit";
                         break;
                     case 1:
                         Toast.makeText(getApplicationContext(),getString(R.string.collegemanage),Toast.LENGTH_SHORT).show();
-                        institution = "manage";
+                        institute = "manage";
                         break;
                     case 2:
                         Toast.makeText(getApplicationContext(),getString(R.string.onoacademic),Toast.LENGTH_SHORT).show();
-                        institution = "ONO";
+                        institute = "ONO";
                         break;
                     case 3:
                         Toast.makeText(getApplicationContext(),getString(R.string.tlvacademic),Toast.LENGTH_SHORT).show();
-                        institution = "TLV";
+                        institute = "TLV";
                         break;
                     case 4:
                         Toast.makeText(getApplicationContext(),getString(R.string.sce),Toast.LENGTH_SHORT).show();
-                        institution = "SCE";
+                        institute = "SCE";
                         break;
                 }
                 return false;
@@ -109,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }else if (input_password.length()<6){
                     Toast.makeText(RegisterActivity.this,getResources().getString(R.string.password_greater_6),Toast.LENGTH_SHORT).show();
                     return;
-                }else if (TextUtils.isEmpty(institution)){
+                }else if (TextUtils.isEmpty(institute)){
                     Toast.makeText(RegisterActivity.this,getResources().getString(R.string.select_institute),Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -156,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("username",username);
                             hashMap.put("imageURL","default");
                             hashMap.put("status","offline");
-                            hashMap.put("institute",institution);
+                            hashMap.put("institute",institute);
 
                             databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

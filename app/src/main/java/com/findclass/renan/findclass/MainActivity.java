@@ -7,11 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.findclass.renan.findclass.Chat.ChatActivity;
 import com.findclass.renan.findclass.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -29,21 +33,27 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private BottomNavigationView navigation;
     private String institute;
+    private int instituteAddress;
     private DatabaseReference databaseReference;
     private Context context = this;
-
-    MapFragment mapFragment = new MapFragment(this);
-    BuildingsFragment buildingsFragment = new BuildingsFragment(this);
+    private boolean flag = true;
+    FragmentTransaction transaction;
+    MapFragment mapFragment;
+    BuildingsFragment buildingsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(getMosadName()));
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        mapFragment = MapFragment.getInstance();
+        buildingsFragment  = BuildingsFragment.getInstance();
 
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getMosadName();
 
         navigation = findViewById(R.id.bottom_nav);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -51,35 +61,55 @@ public class MainActivity extends AppCompatActivity {
         //setupFm( viewPager,this); //Setup Fragment
         //viewPager.setCurrentItem(0); //Set Currrent Item When Activity Start
         //viewPager.setOnPageChangeListener(new PageChange()); //Listeners For Viewpager When Page Changed
+        transaction.add(R.id.fragment_container,mapFragment,"MAP");
+        transaction.commit();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                mapFragment).commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                mapFragment).commit();
     }
 
-    private int getMosadName() {
+    private void getMosadName() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser==null) return R.string.hit;
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                institute = user.getUsername();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        switch (institute){
-            case "hit": return R.string.hit;
-            case "manage" : return R.string.collegemanage;
-            case "ONO" : return R.string.onoacademic;
-            case "SCE": return R.string.sce;
-            case "TLV": return R.string.tlvacademic;
+        if (firebaseUser == null) {
+            flag = false;
+            instituteAddress = R.string.hit;
+            getSupportActionBar().setTitle(instituteAddress);
         }
-        return R.string.hit;
+        else {
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    institute = user.getInstitute();
+                    switch (institute) {
+                        case "hit":
+                            instituteAddress = R.string.hit;
+                            break;
+                        case "manage":
+                            instituteAddress = R.string.collegemanage;
+                            break;
+                        case "ONO":
+                            instituteAddress = R.string.onoacademic;
+                            break;
+                        case "SCE":
+                            instituteAddress = R.string.sce;
+                            break;
+                        case "TLV":
+                            instituteAddress = R.string.tlvacademic;
+                            break;
+                    }
+                    getSupportActionBar().setTitle(instituteAddress);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
     }
 
     public void setupFm(ViewPager viewPager, Context context){
@@ -92,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        public boolean onNavigationItemSelected(MenuItem item) {
 
             Fragment selectedFragment = null;
 
@@ -140,15 +170,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId())
         {
+            case R.id.chat:
+                intent = new Intent(MainActivity.this, ChatActivity.class);
+                if (flag)
+                startActivity(intent);
+                else Toast.makeText(getApplicationContext(),getString(R.string.must_login2),Toast.LENGTH_SHORT).show();
+                return true;
             case R.id.Logout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainActivity.this,StartActivity.class);
+                intent = new Intent(MainActivity.this,StartActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

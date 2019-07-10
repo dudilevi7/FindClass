@@ -41,6 +41,8 @@ public class ChatFragment extends Fragment {
 
     private List<Chatlist> usersList;
 
+    private  String fireId;
+    private User user;
     public ChatFragment() {
     }
 
@@ -95,13 +97,25 @@ public class ChatFragment extends Fragment {
                 mUsers.clear();
                 for (DataSnapshot snapshot: dataSnapshot.getChildren())
                 {
-                    User user = snapshot.getValue(User.class);
+                    user = snapshot.getValue(User.class);
                     for (Chatlist chatlist: usersList)
                     {
-                        if (user.getId().equals(chatlist.getId()))
-                        {
-                            mUsers.add(user);
-                        }
+                        new Thread(){
+                            @Override
+                            public void run() {
+                                super.run();
+                                try {
+                                    fireId = firebaseUser.getUid();
+                                    if (!user.getId().equals(fireId)) {
+                                        mUsers.add(user);
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                        }.start();
                     }
                 }
                 userAdapter = new UserAdapter(getContext(), mUsers, true);

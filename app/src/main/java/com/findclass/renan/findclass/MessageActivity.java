@@ -124,6 +124,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
 
                 readMessage(firebaseUser.getUid(), userId,user.getImageURL());
+                seenMessage(userId);
             }
 
             @Override
@@ -131,7 +132,6 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-        seenMessage(userId);
     }
 
     private void seenMessage(final String userId){

@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class UsersFragment extends Fragment {
     private SearchView queryTextListener;
     private FirebaseUser firebaseUser;
     private MenuItem searchItem;
+    private  String fireId;
+    private User user;
 
     public UsersFragment() {
     }
@@ -52,6 +55,7 @@ public class UsersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mUsers = new ArrayList<>();
+
         redUsers();
         return view;
     }
@@ -67,14 +71,29 @@ public class UsersFragment extends Fragment {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
-                    User user = snapshot.getValue(User.class);
+                    user = snapshot.getValue(User.class);
 
                     assert user != null;
                     assert firebaseUser !=null;
-                    if (!user.getId().equals(firebaseUser.getUid()))
-                    {
-                        mUsers.add(user);
-                    }
+
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {
+                                fireId = firebaseUser.getUid();
+                                if (!user.getId().equals(fireId)) {
+                                    mUsers.add(user);
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                    }.start();
+
+
                 }
                 userAdapter = new UserAdapter(getContext(), mUsers,false);
                 recyclerView.setAdapter(userAdapter);

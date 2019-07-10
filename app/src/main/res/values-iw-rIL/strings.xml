@@ -59,4 +59,7 @@
     <string name="schedule">מערכת שעות</string>
     <string name="ofday">ליום</string>
     <string name="getclass">תאם את הכיתה</string>
+    <string name="chat">צ\'אט</string>
+    <string name="logout">התנתק</string>
+    <string name="must_login2">חייב להתחבר על מנת לפתוח את הצ\'אט</string>
 </resources>

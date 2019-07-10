@@ -32,10 +32,15 @@ public class BuildingsFragment extends Fragment implements View.OnClickListener 
         this.context = context;
     }
 
+    public static BuildingsFragment getInstance() {
+        BuildingsFragment buildingsFragment = new BuildingsFragment();
+        return buildingsFragment;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.recycle_view_frag,container,false);
+        context = getActivity();
         buildingsList = new ArrayList<>();
         for (int i = 1 ; i<=8 ; i++) {
             buildingsList.add(new Building(i+""));
@@ -62,7 +67,7 @@ public class BuildingsFragment extends Fragment implements View.OnClickListener 
 
 
     private void startBuildingsActivity(String building_number) {
-        Intent intent = new Intent(context, ClassesInBuildingActivity.class);
+        Intent intent = new Intent(getContext(), ClassesInBuildingActivity.class);
         intent.putExtra("building_number",building_number);
         startActivity(intent);
         customType(context,"fadein-to-fadeout"); //open classes in specific buildings
@@ -72,43 +77,5 @@ public class BuildingsFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
 
     }
-
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.b1_Ib:
-//                startBuildingsActivity("1");
-//                break;
-//
-//            case R.id.b2_Ib:
-//                startBuildingsActivity("2");
-//                break;
-//
-//            case R.id.b3_Ib:
-//                startBuildingsActivity("3");
-//                break;
-//
-//            case R.id.b4_Ib:
-//                startBuildingsActivity("4");
-//                break;
-//
-//            case R.id.b5_Ib:
-//                startBuildingsActivity("5");
-//                break;
-//
-//            case R.id.b6_Ib:
-//                startBuildingsActivity("6");
-//                break;
-//
-//            case R.id.b7_Ib:
-//                startBuildingsActivity("7");
-//                break;
-//
-//            case R.id.b8_Ib:
-//                startBuildingsActivity("8");
-//                break;
-//        }
-//    }
-
 
 }
