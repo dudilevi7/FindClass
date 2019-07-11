@@ -218,6 +218,7 @@ public class ClassesInBuildingActivity extends AppCompatActivity {
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH");
         int currHour= Integer.parseInt(dateFormat.format(date));
+        if (currHour < 10) return "0"+currHour+":00";
         return currHour + ":00";
     }
 
